@@ -1,0 +1,17 @@
+version: '3.0'
+services:
+  twitter_bot:
+    build:
+      context: .
+      dockerfile: ./twitter.Dockerfile
+    command:
+      - python
+      - start_twitter_bot.py
+      - -lt
+    env_file:
+      - .env
+    environment:
+      - TWITTER_CONSUMER_KEY=${TWITTER_CONSUMER_KEY}
+      - TWITTER_CONSUMER_SECRET=${TWITTER_CONSUMER_SECRET}
+      - TWITTER_ACCESS_TOKEN=${TWITTER_ACCESS_TOKEN}
+      - TWITTER_ACCESS_TOKEN_SECRET=${TWITTER_ACCESS_TOKEN_SECRET}
