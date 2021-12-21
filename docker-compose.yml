@@ -7,7 +7,9 @@ services:
     command:
       - python
       - start_twitter_bot.py
-      - -lt
+      - -l
+      - -kt=#python
+      - -lt=en
     env_file:
       - .env
     environment:

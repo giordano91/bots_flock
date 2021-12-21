@@ -26,8 +26,8 @@ class TwitterStreamListener(tweepy.Stream):
     def on_status(self, tweet):
         logger.info(f"Processing tweet id {tweet.id}")
 
-        # discard replies or own tweets
-        if tweet.in_reply_to_status_id is not None or tweet.user.id == self.authenticated_user.id:
+        # discard replies or own tweets and already liked tweets
+        if tweet.in_reply_to_status_id is not None or tweet.favorited or tweet.user.id == self.authenticated_user.id:
             return
 
         # put like if it has not been done yet
