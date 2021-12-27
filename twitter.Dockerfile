@@ -10,6 +10,6 @@ COPY start_twitter_bot.py .
 RUN mkdir -p bots/twitter
 
 COPY requirements_twitter.txt requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip --no-cache-dir -r requirements.txt
 
 COPY bots/twitter /home/twitter_user/bots/twitter

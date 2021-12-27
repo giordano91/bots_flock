@@ -8,8 +8,10 @@ services:
       - python
       - start_twitter_bot.py
       - -l
+      - -r
       - -kt=#python
       - -lt=en
+      - -iph=2
     env_file:
       - .env
     environment:
