@@ -15,13 +15,21 @@ This bot has the following options:
   example:  
   -kt python #docker  
   Using this configuration just the tweets which contain *python* or *#docker* keyword will be considered  
-- **-lt** or **--languages_to_track**: use this parameter to specify the list of languages to track
+- **-lt** or **--languages_to_track**: use this parameter to specify the list of languages to track   
   example:  
   -lt en  
   Using this configuration just the tweets in english will be considered  
-- **-l** or **--like_tweet**: if this parameter is present, a like is left on tweets that match keywords and languages  
+- **-l** or **--like_tweet**: if this parameter is present, a like is left on tweets that match keywords and languages   
   example:  
   -l  
+- **-r** or **--retweet_tweet**: if this parameter is present, a retweet is done on tweets that match keywords and languages  
+  example:  
+  -r  
+- **-iph** or **--interactions_per_hour**: use this parameter to specify the number of tweets considered per hour. This is useful to do not overload the API and  the daily interactions.  
+  example:
+  -iph 5   
+  Using this configuration five tweets are considered per hour (like and retweet are done if configured)
+
 
 ### How to use Twitter bot?
 To use this bot you need to have Twitter API credentials ([Twitter API link](https://developer.twitter.com/en/docs/twitter-api)).  
