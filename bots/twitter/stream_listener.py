@@ -12,7 +12,7 @@ logger = logging.getLogger()
 
 class TwitterStreamListener(tweepy.Stream):
 
-    def __init__(self, api, like_tweet_enabled, retweet_tweet_enabled, interactions_per_hour):
+    def __init__(self, api, like_tweet_enabled, retweet_tweet_enabled, interactions_per_hour, follow_tweet_author):
         # get twitter app credentials
         consumer_key = os.environ['TWITTER_CONSUMER_KEY']
         consumer_secret = os.environ['TWITTER_CONSUMER_SECRET']
@@ -22,9 +22,11 @@ class TwitterStreamListener(tweepy.Stream):
 
         self.api = api
         self.authenticated_user = api.verify_credentials()
+        self.authenticated_user_followers = self.api.get_followers()
 
         self.like_tweet_enabled = like_tweet_enabled
         self.retweet_tweet_enabled = retweet_tweet_enabled
+        self.follow_tweet_author = follow_tweet_author
 
         if self.like_tweet_enabled:
             self.like_tweet_manager = LikeTweet(self.api)
@@ -64,6 +66,14 @@ class TwitterStreamListener(tweepy.Stream):
         if self.retweet_tweet_enabled and not tweet.retweeted:
             self.retweet_tweet_manager.retweet_tweet(tweet.id)
 
+        time.sleep(1)
+
+        # follow the author of the tweet
+        if self.follow_tweet_author and tweet.user not in self.authenticated_user_followers:
+            self.api.create_friendship(screen_name=tweet.user.screen_name)
+            self.authenticated_user_followers.append(tweet.user)
+
+        time.sleep(1)
         # todo: add a comment
 
         self.current_interactions += 1

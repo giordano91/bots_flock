@@ -12,6 +12,8 @@ services:
       - -kt=#python
       - -lt=en
       - -iph=2
+      - -ff
+      - -fta
     env_file:
       - .env
     environment:

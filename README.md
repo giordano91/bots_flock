@@ -29,6 +29,12 @@ This bot has the following options:
   example:
   -iph 5   
   Using this configuration five tweets are considered per hour (like and retweet are done if configured)
+- **-ff** or **--follow_followers**: if this parameter is present, you will automatically follow every person who follows you. This check is done every four hours.  
+  example:    
+  -ff  
+- **-fta** or **--follow_tweet_author**: if this parameter is present, the author of the tweet you interacted with will be followed  
+  example:  
+  -fta
 
 
 ### How to use Twitter bot?
