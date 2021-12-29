@@ -3,10 +3,11 @@ import logging
 logger = logging.getLogger()
 
 
-class FollowFollowers(object):
+class FollowUsers(object):
 
-    def __init__(self, api):
+    def __init__(self, api, welcome_message=None):
         self.api = api
+        self.welcome_message = welcome_message
 
     def follow_followers(self):
         logger.info("Looking for follow back followers")
@@ -16,8 +17,11 @@ class FollowFollowers(object):
                 try:
                     follower.follow()
                     logger.info(f"\tFollow {follower.screen_name} ({follower.name})")
+                    if self.welcome_message:
+                        self.api.send_direct_message(follower.id, self.welcome_message)
+                        logger.info(f"\tDirect message sent to {follower.screen_name} ({follower.name})")
                 except Exception as e:
-                    logger.error(f"An error occurred following follower {follower.screen_name} ({follower.name}",
+                    logger.error(f"An error occurred following follower {follower.screen_name} ({follower.name})",
                                  exc_info=True)
 
     def create_friendship(self, screen_name):

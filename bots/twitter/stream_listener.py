@@ -4,7 +4,7 @@ import time
 
 import tweepy
 
-from bots.twitter.follow_followers import FollowFollowers
+from bots.twitter.follow_users import FollowUsers
 from bots.twitter.like_tweet import LikeTweet
 from bots.twitter.retweet_tweet import RetweetTweet
 
@@ -36,7 +36,7 @@ class TwitterStreamListener(tweepy.Stream):
             self.retweet_tweet_manager = RetweetTweet(self.api)
 
         if self.follow_tweet_author:
-            self.follow_manager = FollowFollowers(self.api)
+            self.follow_manager = FollowUsers(self.api)
 
         self.start_date = time.time()
         self.current_interactions = 0

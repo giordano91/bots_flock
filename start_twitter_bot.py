@@ -5,7 +5,7 @@ import time
 import schedule
 
 from bots.twitter.auth import create_twitter_api
-from bots.twitter.follow_followers import FollowFollowers
+from bots.twitter.follow_users import FollowUsers
 from bots.twitter.stream_listener import TwitterStreamListener
 
 # set up logging to file
@@ -35,6 +35,8 @@ parser.add_argument("-ff", "--follow_followers", action="store_true", help="If t
                                                                            "hours")
 parser.add_argument("-fta", "--follow_tweet_author", action="store_true",
                     help="If this parameter is present, the author of the tweet you interacted with will be followed")
+parser.add_argument("-wm", "--welcome_message", type=str, help="Specify the direct message that will be sent to each "
+                                                               "new follower")
 
 
 args = parser.parse_args()
@@ -45,6 +47,7 @@ languages_to_track = args.languages_to_track
 interactions_per_hour = args.interactions_per_hour
 follow_followers = args.follow_followers
 follow_tweet_author = args.follow_tweet_author
+welcome_message = args.welcome_message
 
 # todo: add checks on input parameters
 
@@ -59,8 +62,7 @@ if like_tweet_enabled or retweet_tweet_enabled:
 
 # schedule every hour a check to follow new followers
 if follow_followers:
-    follow_followers_manager = FollowFollowers(api)
-    follow_followers_manager.follow_followers()
+    follow_followers_manager = FollowUsers(api, welcome_message)
     schedule.every(4).hours.do(follow_followers_manager.follow_followers)
 
 # apply all the pending schedules
