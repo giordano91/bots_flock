@@ -9,6 +9,9 @@ This application is composed by several Docker containers. Each container repres
 In this way using different parameters it is possible to configure what the bot must do.  
 Being organized in containers, it is easily possible to enable or disable the container according to your needs.  
 
+**IMPORTANT**  
+Please be sure to not overload the interactions per hour as some platforms may block or ban accounts.  
+
 ## Twitter bot
 This bot has the following options:
 - **-kt** or **--keywords_to_track**: use this parameter to specify the list of keywords to track  
@@ -35,6 +38,9 @@ This bot has the following options:
 - **-fta** or **--follow_tweet_author**: if this parameter is present, the author of the tweet you interacted with will be followed  
   example:  
   -fta
+- **-wm** or **--welcome_message**: use this parameter to specify a welcome message to send to new followers. A check every four hours is done.  
+  example:  
+  -wm "Thank for following me!"  
 
 
 ### How to use Twitter bot?
